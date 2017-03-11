@@ -1,4 +1,4 @@
-**Advanced Lane Finding Project**
+#**Advanced Lane Finding Project** #
 
 The goals / steps of this project are the following:
 
@@ -21,9 +21,9 @@ The goals / steps of this project are the following:
 [image6]: ./output_images/clrandgradApplied.png "Threshold applied and warped"
 [image7]: ./output_images/histogram.png "Histogram"
 [image8]: ./output_images/testresult.png "Result image"
-[video1]: ./vid.mp4 "Video"
 
-###Camera Calibration
+
+##Camera Calibration##
 
 The code for this step is contained in the second code cell of the IPython notebook located in "./CarND-AdvancedLaneFinding-P4.ipynb". Class name CalibrateCamera
 
@@ -38,7 +38,7 @@ I then keep the output `objpoints` and `imgpoints` in the calibration object. To
 ![alt text][image3]
 
 
-####Image processing
+##Image processing##
 
 Third code cell of the IPython notebook located in "./CarND-AdvancedLaneFinding-P4.ipynb" is where I apply thresholds to create a binary image. I use gradient threshold, magnitude of gradient, direction of the gradient and color thresholding where we manipulate the S channel after changing the image into HLS color space. Output is binary image which I use.
 
@@ -59,14 +59,14 @@ This resulted in the following source and destination points:
 | 590, 450      | 320, 0        |
 | 690, 450      | 960, 0        |
 | 1031, 683     | 960, 720      |
-|:-------------:|:-------------:|
+
 
 Result after image processing and warping to bird'seye view.
 
 ![alt text][image6]
 
 
-####Finding lanes
+##Finding lanes##
 Fifth code cell of the IPython notebook located in "./CarND-AdvancedLaneFinding-P4.ipynb" is where we search for lane lines.
 Here I used the method of taking a histogram of the warped binary image.
 With this histogram I am adding up the pixel values along each column in the image. In my thresholded binary image, pixels are either 0 or 1, so the two most prominent peaks in this histogram will be good indicators of the x-position of the base of the lane lines. I can use that as a starting point for where to search for the lines. From that point, I can use a sliding window, placed around the line centers, to find and follow the lines up to the top of the frame.
@@ -86,27 +86,27 @@ Result on test image
 ![alt text][image7]
 
 
-####Pipeline
+##Pipeline##
 
 Sixth code cell of the IPython notebook located in "./CarND-AdvancedLaneFinding-P4.ipynb" is where the pipeline is. I have the same pipeline for single images and videos as it only needs an image to work. I have single left and single right line objects to work with through the process. I use them globally within the pipeline but pass the objects to the functions where the objects are updated with data.
 Pipeline take in image.
--> Undistort the original image
--> Get binary image from the undistorted image
--> Warps the binary image
--> Finds lines in the warped binary image
--> draws the lines into result image
--> unwarps the result image with src as dst and dst as src
--> combines the result image with the original undistorted image
--> add info text to new image
--> combines info image to the result image
--> return result.
+* Undistort the original image
+* Get binary image from the undistorted image
+* Warps the binary image
+* Finds lines in the warped binary image
+* draws the lines into result image
+* unwarps the result image with src as dst and dst as src
+* combines the result image with the original undistorted image
+* add info text to new image
+* combines info image to the result image
+* return result.
 
-Here's a [https://youtu.be/QJVTNWFOu0Y](./vid.mp4)
-![alt text][video1]
+Here's a [link to my video](https://youtu.be/QJVTNWFOu0Y)
+
 
 ---
 
-###Discussion
+##Discussion##
 
 I feel like the result are acceptable but not as good as I want it to be. I think it is mostly in the threshold parameters where I can tweak it to a much better result. In the project video it goes well through the first sunlight on the road but after the second it behaves a bit off but is quick to get back on right track. The car should not crash that wall there :)
  
